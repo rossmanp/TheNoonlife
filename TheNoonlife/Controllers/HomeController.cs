@@ -1,29 +1,33 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
+using System.Net;
+using Newtonsoft.Json.Linq;
+using TheNoonlife.Models;
 
 namespace TheNoonlife.Controllers
 {
     public class HomeController : Controller
     {
-        const string clientID = "Z_gnHdaLf8031URZ0EkRzg";
-        const string clientSecret = "lClwLGU6P5N2xrjm3dtKY7iA8pO697Qr5p6b7TGtc6J5QGSDecdUTndloC5jskGQ";
-        public ActionResult SearchEx()
+        public ActionResult FindBrunchiness(LocationModel location)
         {
-            var strUrl = "https://api.yelp.com/oauth2/token";
-            var strPostData = "grant_type=client_credentials";
-            strPostData += "&client_id=" + clientID;
-            strPostData += "&client_secret=" + clientSecret;
-            System.Net.WebClient wc = new System.Net.WebClient();
-            var strResponse = wc.UploadString(strUrl, strPostData);
-            var login = JavascriptDeserialize<OAuthLogin>(strResponse);
-            var strSearch = "https://api.yelp.com/v3/businesses/search?location=49523";
-            wc.Headers.Add("Authorization", "Bearer " + login.access_token);
-            var strSearchResponse = wc.DownloadString(strSearch);
-            ViewBag.Result = strSearchResponse;
+            //Fetch latitude and longitude using the geocode api
+            var geocodeApiRequest = new GoogleGeocodeApiRequest(location);
+            var jTokenFetcher = new JtokenFetcher();
+            var geocodeJToken = jTokenFetcher.GetJToken(geocodeApiRequest.RequestUrl);
+
+            //Set the location lat and lng equal to the results returned from the geocode api request
+            location.Latitude = geocodeJToken["results"][0]["geometry"]["location"]["lat"].ToString();
+            location.Longitude = geocodeJToken["results"][0]["geometry"]["location"]["lng"].ToString();
+            var webClient = new WebClient();
+
+            //Pass the LocationModel to the YelpApiRequest to build the request url
+            //from the latitude and longitude properties of the object
+            var yelp = new YelpApiRequest(location);
+            webClient.Headers.Add("Authorization", "Bearer " + yelp.AccessToken);
+            var strSearchResponse = webClient.DownloadString(yelp.RequestUrl);
+            var yelpJtoken = JObject.Parse(strSearchResponse);
+            ViewBag.Result = yelpJtoken;
             return View();
         }
 
@@ -33,12 +37,6 @@ namespace TheNoonlife.Controllers
             return jsSerializer.Deserialize<T>(json);
         }
 
-        public class OAuthLogin
-        {
-            public string token_type { get; set; }
-            public int expires_in { get; set; }
-            public string access_token { get; set; }
-        }
         public ActionResult Index()
         {
             return View();
