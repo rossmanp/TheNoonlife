@@ -10,7 +10,7 @@ namespace TheNoonlife.Models
 {
     public class JtokenFetcher
     {
-        public JToken GetJToken(string webRequest)
+        public JToken GetJTokenWithKey(string webRequest)
         {
             HttpWebRequest request =
                 WebRequest.CreateHttp(webRequest);
@@ -24,6 +24,15 @@ namespace TheNoonlife.Models
             string apiResult = reader.ReadToEnd();
             var json = JObject.Parse(apiResult);
             return json;
+        }
+
+        public JToken GetJTokenWithToken(YelpApiRequest yelp)
+        {
+            var webClient = new WebClient();
+            webClient.Headers.Add("Authorization", "Bearer " + yelp.AccessToken);
+            var requestResult = webClient.DownloadString(yelp.RequestUrl);
+            var yelpJtoken = JObject.Parse(requestResult);
+            return yelpJtoken;
         }
     }
 }
