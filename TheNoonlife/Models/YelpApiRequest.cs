@@ -1,6 +1,5 @@
 ﻿using System.Net;
 using System.Web.Script.Serialization;
-using TheNoonlife.Controllers;
 
 namespace TheNoonlife.Models
 {
@@ -34,7 +33,7 @@ namespace TheNoonlife.Models
             get
             {
                 var requestUrl =
-                    $"https://api.yelp.com/v3/businesses/search?latitude={_locationModel.Latitude}&longitude={_locationModel.Longitude}";
+                    $"https://api.yelp.com/v3/businesses/search?latitude={_locationModel.Latitude}&longitude={_locationModel.Longitude}&categories?=food";
                 return requestUrl;
             }
         }

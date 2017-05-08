@@ -1,8 +1,4 @@
-﻿using System;
-using System.Web.Mvc;
-using System.Web.Script.Serialization;
-using System.Net;
-using Newtonsoft.Json.Linq;
+﻿using System.Web.Mvc;
 using TheNoonlife.Models;
 
 namespace TheNoonlife.Controllers
@@ -40,9 +36,9 @@ namespace TheNoonlife.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+           var yelpAccess = new YelpApiRequest(new LocationModel());
 
-            return View();
+            return View(yelpAccess);
         }
 
         public ActionResult Contact()
