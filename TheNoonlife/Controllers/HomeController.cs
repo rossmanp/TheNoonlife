@@ -31,12 +31,11 @@ namespace TheNoonlife.Controllers
             
             //Get the jtoken from the yelp api
             var yelpJtoken = jTokenFetcher.GetJTokenWithToken(yelp);
-            List<string> places = new List<string>();
+            List<Restaurant> places = new List<Restaurant>();
             for (int i = 0; i < yelpJtoken["businesses"].Count(); i++)
             {
-                places.Add("<a href=" + yelpJtoken["businesses"][i]["id"].ToString() + ">" +
-                      yelpJtoken["businesses"][i]["name"].ToString() + " ");
-                    
+                places.Add(new Models.Restaurant(yelpJtoken["businesses"][i]["name"].ToString(),
+                 yelpJtoken["businesses"][i]["id"].ToString()));            
             }
             ViewBag.Result = places;
             return View(places);
