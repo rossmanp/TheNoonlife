@@ -37,5 +37,12 @@ namespace TheNoonlife.Models
                 return requestUrl;
             }
         }
+
+        public string RequestBusiness(string id)
+        {       
+                var requestUrl =
+                    $"https://api.yelp.com/v3/businesses/{id}";
+                return requestUrl;            
+        }
     }
 }

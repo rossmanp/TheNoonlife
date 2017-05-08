@@ -2,6 +2,8 @@
 using System.Net;
 using Newtonsoft.Json.Linq;
 using System.Linq;
+using System.Web.Mvc;
+using System.Collections.Generic;
 
 namespace TheNoonlife.Models
 {
@@ -30,13 +32,9 @@ namespace TheNoonlife.Models
             var requestResult = webClient.DownloadString(yelp.RequestUrl);
             var yelpJtoken = JObject.Parse(requestResult);
 
-            var result = "";
-            for (int i = 0; i < yelpJtoken["businesses"].Count(); i++)
-            {
-                result += yelpJtoken["businesses"][i]["name"].ToString() + " " +
-                    yelpJtoken["businesses"][i]["id"].ToString();
-            }
-            return result;
+            
+            
+            return yelpJtoken;
             //return yelpJtoken;
         }
     }

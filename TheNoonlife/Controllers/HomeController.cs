@@ -1,5 +1,7 @@
-﻿using System.Web.Mvc;
+﻿using System.Collections.Generic;
+using System.Web.Mvc;
 using TheNoonlife.Models;
+using System.Linq;
 
 namespace TheNoonlife.Controllers
 {
@@ -29,8 +31,15 @@ namespace TheNoonlife.Controllers
             
             //Get the jtoken from the yelp api
             var yelpJtoken = jTokenFetcher.GetJTokenWithToken(yelp);
-            ViewBag.Result = yelpJtoken;
-            return View();
+            List<string> places = new List<string>();
+            for (int i = 0; i < yelpJtoken["businesses"].Count(); i++)
+            {
+                places.Add("<a href=" + yelpJtoken["businesses"][i]["id"].ToString() + ">" +
+                      yelpJtoken["businesses"][i]["name"].ToString() + " ");
+                    
+            }
+            ViewBag.Result = places;
+            return View(places);
 
         }
 
