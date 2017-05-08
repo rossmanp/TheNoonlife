@@ -33,7 +33,7 @@ namespace TheNoonlife.Models
             get
             {
                 var requestUrl =
-                    $"https://api.yelp.com/v3/businesses/search?latitude={_locationModel.Latitude}&longitude={_locationModel.Longitude}&categories?=food";
+                    $"https://api.yelp.com/v3/businesses/search?term=brunch&latitude={_locationModel.Latitude}&longitude={_locationModel.Longitude}";
                 return requestUrl;
             }
         }

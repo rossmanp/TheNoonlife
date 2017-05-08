@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Net;
 using Newtonsoft.Json.Linq;
+using System.Linq;
 
 namespace TheNoonlife.Models
 {
@@ -28,7 +29,14 @@ namespace TheNoonlife.Models
             webClient.Headers.Add("Authorization", "Bearer " + yelp.AccessToken);
             var requestResult = webClient.DownloadString(yelp.RequestUrl);
             var yelpJtoken = JObject.Parse(requestResult);
-            return yelpJtoken;
+
+            var result = "";
+            for (int i = 0; i < yelpJtoken["businesses"].Count(); i++)
+            {
+                result += yelpJtoken["businesses"][i]["id"].ToString();
+            }
+            return result;
+            //return yelpJtoken;
         }
     }
 }
