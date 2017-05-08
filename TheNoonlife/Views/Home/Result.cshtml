@@ -1,7 +1,13 @@
-﻿
+﻿@model IEnumerable<TheNoonlife.Models.Restaurant>
+
 @{
     ViewBag.Title = "Result";
 }
 
 <h2>Result</h2>
-@ViewBag.Result
+<p>
+    
+    @ViewBag.Name<br />
+    @ViewBag.Price<br />
+    <img src="@ViewBag.Picture" width="200" height="200" /><br />
+</p>
