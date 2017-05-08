@@ -33,7 +33,8 @@ namespace TheNoonlife.Models
             var result = "";
             for (int i = 0; i < yelpJtoken["businesses"].Count(); i++)
             {
-                result += yelpJtoken["businesses"][i]["id"].ToString();
+                result += yelpJtoken["businesses"][i]["name"].ToString() + " " +
+                    yelpJtoken["businesses"][i]["id"].ToString();
             }
             return result;
             //return yelpJtoken;
