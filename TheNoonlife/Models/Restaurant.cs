@@ -13,6 +13,11 @@ namespace TheNoonlife.Models
             this.Id = Id;
         }
 
+        public Restaurant()
+        {
+
+        }
+
         public string Name { get; set; }
 
         public string Id { get; set; }

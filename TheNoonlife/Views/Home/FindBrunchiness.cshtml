@@ -7,7 +7,6 @@
 <h2>FindBrunchiness</h2>
 <p>@foreach (var item in Model)
 {
-   @item.Name
-    @item.ID
+    @Html.ActionLink(item.Name, "Result", "Home", new { Id = item.Id }, null)<br />
 }</p>
 

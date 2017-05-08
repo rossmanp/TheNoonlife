@@ -8,12 +8,22 @@ namespace TheNoonlife.Models
         private const string clientID = "Z_gnHdaLf8031URZ0EkRzg";
         private const string clientSecret = "lClwLGU6P5N2xrjm3dtKY7iA8pO697Qr5p6b7TGtc6J5QGSDecdUTndloC5jskGQ";
         private readonly LocationModel _locationModel;
-
+        private readonly Restaurant _restaurant;
+      
         public YelpApiRequest(LocationModel location)
         {
-            _locationModel = location;
+            _locationModel = location;                   
         }
 
+        public YelpApiRequest(Restaurant place)
+        {
+            _restaurant = place;
+        }
+
+        public YelpApiRequest()
+        {
+
+        }
         public string AccessToken
         {
             get

@@ -30,10 +30,18 @@ namespace TheNoonlife.Models
             var webClient = new WebClient();
             webClient.Headers.Add("Authorization", "Bearer " + yelp.AccessToken);
             var requestResult = webClient.DownloadString(yelp.RequestUrl);
-            var yelpJtoken = JObject.Parse(requestResult);
+            var yelpJtoken = JObject.Parse(requestResult);                      
+            return yelpJtoken;
+            //return yelpJtoken;
+        }
 
-            
-            
+        public JToken GetBusinessJTokenWithToken(string id)
+        {
+            var yelp = new YelpApiRequest();
+            var webClient = new WebClient();
+            webClient.Headers.Add("Authorization", "Bearer " + yelp.AccessToken);
+            var requestResult = webClient.DownloadString(yelp.RequestBusiness(id));
+            var yelpJtoken = JObject.Parse(requestResult);
             return yelpJtoken;
             //return yelpJtoken;
         }

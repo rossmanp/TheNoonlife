@@ -42,6 +42,14 @@ namespace TheNoonlife.Controllers
 
         }
 
+        public ActionResult Result(string Id)
+        {
+            var jTokenFetcher = new JtokenFetcher();                      
+            var yelpJtoken = jTokenFetcher.GetBusinessJTokenWithToken(Id);
+            ViewBag.Result = yelpJtoken;
+            return View();
+        }
+
         public ActionResult About()
         {
            var yelpAccess = new YelpApiRequest(new LocationModel());
