@@ -1,11 +1,11 @@
 ﻿@model IEnumerable<TheNoonlife.Models.Restaurant>
 
 @{
-    ViewBag.Title = "FindBrunchiness";
+    ViewBag.Title = "FindBrunchWithSearch";
 }
 
 
-<h2>FindBrunchiness</h2>
+<h2>FindBrunchWithSearch</h2>
 <p>@foreach (var item in Model)
 {
     @Html.ActionLink(item.Name, "Result", "Home", new { Id = item.Id }, null)<br />

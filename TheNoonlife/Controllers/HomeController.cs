@@ -1,8 +1,14 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using TheNoonlife.Models;
 using System.Collections.Generic;
+using System.Data.Entity.ModelConfiguration.Conventions;
+using System.IO;
 using System.Linq;
+using System.Net.NetworkInformation;
 using Microsoft.AspNet.Identity;
+using Newtonsoft.Json.Linq;
+using RestSharp;
 
 namespace TheNoonlife.Controllers
 {
@@ -17,10 +23,14 @@ namespace TheNoonlife.Controllers
                 var currentUser = _db.Users.Find(User.Identity.GetUserId());
                 return View("UserHomePage", currentUser);
             }
+
             return View();
         }
 
-        public ActionResult FindBrunchiness(LocationModel location)
+
+
+
+        public ActionResult FindBrunchWithSearch(LocationModel location)
         {
             //Fetch latitude and longitude using the geocode api
             var geocodeApiRequest = new GoogleGeocodeApiRequest(location);
@@ -47,7 +57,33 @@ namespace TheNoonlife.Controllers
                  yelpJtoken["businesses"][i]["id"].ToString()));
             }
 
-            return View(places);
+            return View("FindBrunch", places);
+        }
+
+        public ActionResult FindBrunchWithCurrentLocation()
+        {
+            var locater = new GoogleGeolocationApi();
+            var currentLocation = locater.GetGeolocation();
+
+            //Pass location to the YelpApiRequest constructor 
+            //we will use this to build the request url
+            //from the latitude and longitude properties of location
+            var yelp = new YelpApiRequest(currentLocation);
+
+            //Get the jtoken from the yelp api
+            var jTokenFetcher = new JtokenFetcher();
+            var yelpJtoken = jTokenFetcher.GetJTokenWithToken(yelp);
+
+            //Build a list of results to pass to the view
+            List<Restaurant> places = new List<Restaurant>();
+            for (int i = 0; i < yelpJtoken["businesses"].Count(); i++)
+            {
+                places.Add(new Restaurant(yelpJtoken["businesses"][i]["name"].ToString(),
+                    yelpJtoken["businesses"][i]["id"].ToString()));
+            }
+
+            return View("FindBrunch", places);
+
         }
 
         public ActionResult Result(string Id)
@@ -90,6 +126,21 @@ namespace TheNoonlife.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        public static string GetMACAddress()
+        {
+            NetworkInterface[] nics = NetworkInterface.GetAllNetworkInterfaces();
+            String sMacAddress = string.Empty;
+            foreach (NetworkInterface adapter in nics)
+            {
+                if (sMacAddress == String.Empty)// only return MAC Address from first card  
+                {
+                    IPInterfaceProperties properties = adapter.GetIPProperties();
+                    sMacAddress = adapter.GetPhysicalAddress().ToString();
+                }
+            }
+            return sMacAddress;
         }
     }
 }
