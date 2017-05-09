@@ -6,8 +6,12 @@
 
 <h2>Result</h2>
 <p>
-    
+
     @ViewBag.Name<br />
     @ViewBag.Price<br />
     <img src="@ViewBag.Picture" width="200" height="200" /><br />
+    @using (Html.BeginForm("AddFavoriteRestaurant", "Home"))
+    {
+        <input type="submit" value="@ViewBag.Name" name="selection" />
+    }
 </p>

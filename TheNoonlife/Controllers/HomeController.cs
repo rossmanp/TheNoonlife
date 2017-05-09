@@ -1,17 +1,14 @@
-﻿using System;
-using System.Web.Mvc;
-using System.Web.Script.Serialization;
-using System.Net;
-using Newtonsoft.Json.Linq;
+﻿using System.Web.Mvc;
 using TheNoonlife.Models;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNet.Identity;
 
 namespace TheNoonlife.Controllers
 {
     public class HomeController : Controller
     {
-  
+        private ApplicationDbContext _db = new ApplicationDbContext();
         public ActionResult Index()
         {
             return View();
@@ -60,6 +57,17 @@ namespace TheNoonlife.Controllers
             return View();
         }
 
+        [Authorize]
+        public ActionResult AddFavoriteRestaurant(string selection)
+        {
+            if (ModelState.IsValid)
+            {
+                var currentUser = _db.Users.Find(User.Identity.GetUserId());
+                currentUser.FavoriteRestaurant = selection;
+                _db.SaveChanges();
+            }
+            return View("Index");
+        }
         public ActionResult About()
         {
            var yelpAccess = new YelpApiRequest(new LocationModel());

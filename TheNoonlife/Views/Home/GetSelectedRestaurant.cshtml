@@ -1,0 +1,16 @@
+﻿@model TheNoonlife.Models.Restaurant
+
+@{
+    ViewBag.Title = "GetSelectedRestaurant";
+}
+
+<h2>GetSelectedRestaurant</h2>
+<p>
+    <img src="@Model.ImageUrl" width="200" height="200"/><br/>
+    @Model.Name<br/>
+    @Model.Price<br/>
+    @using (Html.BeginForm("SelectFavoriteRestaurant", "Home"))
+    {
+        <input type="submit" name="favorite" value="@Model.Id"/>
+    }
+</p>
