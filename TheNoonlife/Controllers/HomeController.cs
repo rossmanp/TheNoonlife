@@ -34,6 +34,7 @@ namespace TheNoonlife.Controllers
             List<Restaurant> places = new List<Restaurant>();
             for (int i = 0; i < yelpJtoken["businesses"].Count(); i++)
             {
+                
                 places.Add(new Models.Restaurant(yelpJtoken["businesses"][i]["name"].ToString(),
                  yelpJtoken["businesses"][i]["id"].ToString()));            
             }
