@@ -122,6 +122,10 @@
       <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.105.2.3\lib\net46\RestSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="SimpleOAuth, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SimpleOAuth.Net.1.0.1\lib\net20\SimpleOAuth.dll</HintPath>
       <Private>True</Private>
@@ -219,6 +223,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\GoogleGeocodeApiRequest.cs" />
+    <Compile Include="Models\GoogleGeolocationApi.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\JtokenFetcher.cs" />
     <Compile Include="Models\LocationModel.cs" />
