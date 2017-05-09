@@ -9,8 +9,14 @@ namespace TheNoonlife.Controllers
     public class HomeController : Controller
     {
         private readonly ApplicationDbContext _db = new ApplicationDbContext();
+
         public ActionResult Index()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                var currentUser = _db.Users.Find(User.Identity.GetUserId());
+                return View("UserHomePage", currentUser);
+            }
             return View();
         }
 
@@ -29,7 +35,7 @@ namespace TheNoonlife.Controllers
             //we will use this to build the request url
             //from the latitude and longitude properties of location
             var yelp = new YelpApiRequest(location);
-            
+
             //Get the jtoken from the yelp api
             var yelpJtoken = jTokenFetcher.GetJTokenWithToken(yelp);
 
@@ -38,7 +44,7 @@ namespace TheNoonlife.Controllers
             for (int i = 0; i < yelpJtoken["businesses"].Count(); i++)
             {
                 places.Add(new Restaurant(yelpJtoken["businesses"][i]["name"].ToString(),
-                 yelpJtoken["businesses"][i]["id"].ToString()));            
+                 yelpJtoken["businesses"][i]["id"].ToString()));
             }
 
             return View(places);
@@ -47,7 +53,7 @@ namespace TheNoonlife.Controllers
         public ActionResult Result(string Id)
         {
             //Get json data as a jtoken
-            var jTokenFetcher = new JtokenFetcher();                      
+            var jTokenFetcher = new JtokenFetcher();
             var yelpJtoken = jTokenFetcher.GetBusinessJTokenWithToken(Id);
 
             //Instantiate a Restaurant to be passed to the view
@@ -57,7 +63,7 @@ namespace TheNoonlife.Controllers
                 yelpJtoken["name"].ToString(),
                 yelpJtoken["image_url"].ToString(),
                 yelpJtoken["price"].ToString());
-           
+
             return View(restaurant);
         }
 
@@ -74,7 +80,7 @@ namespace TheNoonlife.Controllers
         }
         public ActionResult About()
         {
-           var yelpAccess = new YelpApiRequest(new LocationModel());
+            var yelpAccess = new YelpApiRequest(new LocationModel());
 
             return View(yelpAccess);
         }
