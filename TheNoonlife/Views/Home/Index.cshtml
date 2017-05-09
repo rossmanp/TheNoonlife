@@ -1,5 +1,10 @@
-﻿@using (Html.BeginForm("FindBrunchiness", "Home"))
+﻿@using (Html.BeginForm("FindBrunchWithSearch", "Home"))
 {
   @Html.TextBox("LocationName")
     <input type="submit"/>
+    
 }
+@using (Html.BeginForm("FindBrunchWithCurrentLocation", "Home"))
+    {
+        <input type="submit" />
+    }
