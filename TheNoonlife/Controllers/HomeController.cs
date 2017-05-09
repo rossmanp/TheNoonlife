@@ -8,7 +8,7 @@ namespace TheNoonlife.Controllers
 {
     public class HomeController : Controller
     {
-        private ApplicationDbContext _db = new ApplicationDbContext();
+        private readonly ApplicationDbContext _db = new ApplicationDbContext();
         public ActionResult Index()
         {
             return View();
@@ -32,29 +32,33 @@ namespace TheNoonlife.Controllers
             
             //Get the jtoken from the yelp api
             var yelpJtoken = jTokenFetcher.GetJTokenWithToken(yelp);
+
+            //Build a list of results to pass to the view
             List<Restaurant> places = new List<Restaurant>();
             for (int i = 0; i < yelpJtoken["businesses"].Count(); i++)
             {
-                
-                places.Add(new Models.Restaurant(yelpJtoken["businesses"][i]["name"].ToString(),
+                places.Add(new Restaurant(yelpJtoken["businesses"][i]["name"].ToString(),
                  yelpJtoken["businesses"][i]["id"].ToString()));            
             }
-            ViewBag.Result = places;
-            return View(places);
 
+            return View(places);
         }
 
         public ActionResult Result(string Id)
         {
+            //Get json data as a jtoken
             var jTokenFetcher = new JtokenFetcher();                      
             var yelpJtoken = jTokenFetcher.GetBusinessJTokenWithToken(Id);
-            ViewBag.Result = yelpJtoken;
 
-            ViewBag.Name = yelpJtoken["name"].ToString();
-            ViewBag.Picture = yelpJtoken["image_url"].ToString();
-            ViewBag.Price = yelpJtoken["price"].ToString();
-            
-            return View();
+            //Instantiate a Restaurant to be passed to the view
+            //setting the values equal to the relevant json data.
+            //(This can be changed to use a deserialize method at some point)
+            var restaurant = new Restaurant(
+                yelpJtoken["name"].ToString(),
+                yelpJtoken["image_url"].ToString(),
+                yelpJtoken["price"].ToString());
+           
+            return View(restaurant);
         }
 
         [Authorize]

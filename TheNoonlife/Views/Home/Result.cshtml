@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TheNoonlife.Models.Restaurant>
+﻿@model TheNoonlife.Models.Restaurant
 
 @{
     ViewBag.Title = "Result";
@@ -6,10 +6,10 @@
 
 <h2>Result</h2>
 <p>
-
-    @ViewBag.Name<br />
-    @ViewBag.Price<br />
-    <img src="@ViewBag.Picture" width="200" height="200" /><br />
+    <img src="@Model.Picture" width="200" height="200" /><br />
+    @Model.Name<br />
+    @Model.Price<br />
+    
     @using (Html.BeginForm("AddFavoriteRestaurant", "Home"))
     {
         <input type="submit" value="@ViewBag.Name" name="selection" />
