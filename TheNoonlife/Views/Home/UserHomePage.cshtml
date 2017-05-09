@@ -3,10 +3,11 @@
 @{
     ViewBag.Title = "UserHomePage";
 }
+@using (Html.BeginForm("FindBrunchiness", "Home"))
+{
 @Html.TextBox("LocationName")
 <input type="submit" />
-
+}
 <h2>UserHomePage</h2>
 @Model.FavoriteRestaurant
 
-@Html.DisplayNameFor(model => model.FavoriteRestaurant)
