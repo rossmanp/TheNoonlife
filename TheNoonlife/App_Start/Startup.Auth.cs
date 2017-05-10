@@ -54,9 +54,9 @@ namespace TheNoonlife
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "1924145504528120",
+               appSecret: "7276a4e5e84ec6fa533cade0668d5f54");
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{

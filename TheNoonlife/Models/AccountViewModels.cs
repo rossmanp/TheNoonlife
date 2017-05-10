@@ -8,6 +8,8 @@ namespace TheNoonlife.Models
         [Required]
         [Display(Name = "Email")]
         public string Email { get; set; }
+        public string Gender { get; set; }
+        public int Age { get; set; }
     }
 
     public class ExternalLoginListViewModel

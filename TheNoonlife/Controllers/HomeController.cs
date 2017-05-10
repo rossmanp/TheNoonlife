@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 
 namespace TheNoonlife.Controllers
 {
+    [RequireHttps]
     public class HomeController : Controller
     {
         private readonly ApplicationDbContext _db = new ApplicationDbContext();
@@ -24,7 +25,10 @@ namespace TheNoonlife.Controllers
             return View();
         }
 
-
+        public ActionResult UserHomePage()
+        {
+            return View();
+        }
 
 
         public ActionResult FindBrunchWithSearch(LocationModel location)

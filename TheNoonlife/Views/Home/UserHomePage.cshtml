@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "UserHomePage";
 }
+<<<<<<< HEAD
 <link href="~/Content/custom.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 @using (Html.BeginForm("FindBrunch", "Home"))
@@ -12,6 +13,15 @@
 }
 
 <body>
+||||||| merged common ancestors
+@using (Html.BeginForm("FindBrunchiness", "Home"))
+{
+@Html.TextBox("LocationName")
+<input type="submit" />
+}
+=======
+
+>>>>>>> 79c3d465bfbbe5ff16a3fa49d74c2bf8e70f3c4f
 <h2>UserHomePage</h2>
 <!-- @Model.FavoriteRestaurant -->
     <div class="w3-container">
@@ -63,4 +73,13 @@ function showDivs(n) {
 }
     </script>
 
+<<<<<<< HEAD
 </body>
+||||||| merged common ancestors
+=======
+@using (Html.BeginForm("FindBrunchWithSearch", "Home"))
+{
+    @Html.TextBox("LocationName")
+    <input type="submit" />
+}
+>>>>>>> 79c3d465bfbbe5ff16a3fa49d74c2bf8e70f3c4f
