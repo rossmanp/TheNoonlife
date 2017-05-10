@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 
 namespace TheNoonlife.Controllers
 {
+    [RequireHttps]
     public class HomeController : Controller
     {
         private readonly ApplicationDbContext _db = new ApplicationDbContext();
