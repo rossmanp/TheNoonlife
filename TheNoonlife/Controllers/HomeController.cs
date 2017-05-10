@@ -25,7 +25,10 @@ namespace TheNoonlife.Controllers
             return View();
         }
 
-
+        public ActionResult UserHomePage()
+        {
+            return View();
+        }
 
 
         public ActionResult FindBrunchWithSearch(LocationModel location)
