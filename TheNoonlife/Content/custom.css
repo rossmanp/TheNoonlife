@@ -1,2 +1,10 @@
-﻿body {
+﻿/* ===== site cutomization =====*/
+
+body {
+    background-image: url('images/81.jpg');
 }
+.navbar-inverse {
+    background-color: #4C4C4C;
+}
+
+
