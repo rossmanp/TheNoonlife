@@ -2,13 +2,9 @@
 using System.Web.Mvc;
 using TheNoonlife.Models;
 using System.Collections.Generic;
-using System.Data.Entity.ModelConfiguration.Conventions;
-using System.IO;
 using System.Linq;
 using System.Net.NetworkInformation;
 using Microsoft.AspNet.Identity;
-using Newtonsoft.Json.Linq;
-using RestSharp;
 
 namespace TheNoonlife.Controllers
 {
@@ -26,9 +22,6 @@ namespace TheNoonlife.Controllers
 
             return View();
         }
-
-
-
 
         public ActionResult FindBrunchWithSearch(LocationModel location)
         {
