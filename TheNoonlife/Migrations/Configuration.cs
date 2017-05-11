@@ -9,7 +9,7 @@ namespace TheNoonlife.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationsEnabled = false;
         }
 
         protected override void Seed(TheNoonlife.Models.ApplicationDbContext context)
