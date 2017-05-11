@@ -158,6 +158,7 @@ namespace TheNoonlife.Controllers
                     Email = model.Email,
                     Age = model.Age,
                     Gender = model.Gender,
+                    FavoriteRestaurant = ""
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
@@ -379,7 +380,8 @@ namespace TheNoonlife.Controllers
                     UserName = model.Email,
                     Email = model.Email,
                     Gender = model.Gender,
-                    Age = model.Age
+                    Age = model.Age,
+                    FavoriteRestaurant = ""
                 };
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)

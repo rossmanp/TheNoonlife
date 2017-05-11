@@ -3,27 +3,20 @@
 @{
     ViewBag.Title = "UserHomePage";
 }
-<<<<<<< HEAD
+
 <link href="~/Content/custom.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-@using (Html.BeginForm("FindBrunch", "Home"))
-{
-@Html.TextBox("LocationName")
-<input type="submit" />
-}
+
 
 <body>
-||||||| merged common ancestors
-@using (Html.BeginForm("FindBrunchiness", "Home"))
-{
-@Html.TextBox("LocationName")
-<input type="submit" />
-}
-=======
-
->>>>>>> 79c3d465bfbbe5ff16a3fa49d74c2bf8e70f3c4f
 <h2>UserHomePage</h2>
-<!-- @Model.FavoriteRestaurant -->
+@using (Html.BeginForm("FindBrunchWithSearch", "Home"))
+{
+    @Html.TextBox("LocationName")
+    <input type="submit" />
+}
+    
+@Model.FavoriteRestaurant
     <div class="w3-container">
         <h2>Slideshow Indicators</h2>
         <p>An example of using buttons to indicate how many slides there are in the slideshow, and which slide the user is currently viewing.</p>
@@ -73,13 +66,7 @@ function showDivs(n) {
 }
     </script>
 
-<<<<<<< HEAD
+
 </body>
-||||||| merged common ancestors
-=======
-@using (Html.BeginForm("FindBrunchWithSearch", "Home"))
-{
-    @Html.TextBox("LocationName")
-    <input type="submit" />
-}
->>>>>>> 79c3d465bfbbe5ff16a3fa49d74c2bf8e70f3c4f
+
+
