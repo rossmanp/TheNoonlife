@@ -2,9 +2,12 @@
 {
   @Html.TextBox("LocationName")
     <input type="submit"/>
-    
 }
+<link href="~/Content/custom.css" rel="stylesheet" />
+
 @using (Html.BeginForm("FindBrunchWithCurrentLocation", "Home"))
     {
-        <input type="submit" />
+        <input type="submit" /><p>Get Brunches by Geolocation</p>
     }
+
+<div class="jumbotron"> this</div>

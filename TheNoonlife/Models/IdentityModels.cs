@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.ComponentModel.DataAnnotations;
 
 namespace TheNoonlife.Models
 {
@@ -10,6 +11,11 @@ namespace TheNoonlife.Models
     {
         public string FavoriteRestaurant { get; set; }
 
+        [StringLength(20)]
+        public string Gender { get; set; }
+        //[Required]
+        [Range(1, 120)]
+        public int Age { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType

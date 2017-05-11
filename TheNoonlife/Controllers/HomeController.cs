@@ -5,9 +5,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.NetworkInformation;
 using Microsoft.AspNet.Identity;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7048a497facc8afad19c4d7d6a970a2933881a50
 
 namespace TheNoonlife.Controllers
 {
+    [RequireHttps]
     public class HomeController : Controller
     {
         private readonly ApplicationDbContext _db = new ApplicationDbContext();
@@ -23,6 +28,15 @@ namespace TheNoonlife.Controllers
             return View();
         }
 
+<<<<<<< HEAD
+=======
+        public ActionResult UserHomePage()
+        {
+            return View();
+        }
+
+
+>>>>>>> 7048a497facc8afad19c4d7d6a970a2933881a50
         public ActionResult FindBrunchWithSearch(LocationModel location)
         {
             //Fetch latitude and longitude using the geocode api
