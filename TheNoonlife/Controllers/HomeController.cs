@@ -27,7 +27,8 @@ namespace TheNoonlife.Controllers
         [Authorize]
         public ActionResult UserHomePage()
         {
-            return View();
+            var user = _db.Users.Find(User.Identity.GetUserId());     
+            return View(user);
         }
 
 

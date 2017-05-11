@@ -158,7 +158,7 @@ namespace TheNoonlife.Controllers
                     Email = model.Email,
                     Age = model.Age,
                     Gender = model.Gender,
-                    FavoriteRestaurant = ""
+                    FavoriteRestaurant = "You have not chosen a favorite brunch yet."
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
@@ -381,7 +381,7 @@ namespace TheNoonlife.Controllers
                     Email = model.Email,
                     Gender = model.Gender,
                     Age = model.Age,
-                    FavoriteRestaurant = ""
+                    FavoriteRestaurant = "You have not chosen a favorite brunch yet."
                 };
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)

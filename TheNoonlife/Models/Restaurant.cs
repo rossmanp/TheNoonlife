@@ -19,12 +19,7 @@ namespace TheNoonlife.Models
             this.Picture = picture;
             this.Price = price;
         }
-
-        public Restaurant()
-        {
-
-        }
-
+       
         public string Name { get; set; }
 
         public string Id { get; set; }
