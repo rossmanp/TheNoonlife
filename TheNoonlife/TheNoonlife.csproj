@@ -224,6 +224,18 @@
     <Compile Include="Migrations\201705101729009_Init.Designer.cs">
       <DependentUpon>201705101729009_Init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705111503061_updatedModel.cs" />
+    <Compile Include="Migrations\201705111503061_updatedModel.Designer.cs">
+      <DependentUpon>201705111503061_updatedModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705111524145_removedGender.cs" />
+    <Compile Include="Migrations\201705111524145_removedGender.Designer.cs">
+      <DependentUpon>201705111524145_removedGender.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705111530499_addedGenderBack.cs" />
+    <Compile Include="Migrations\201705111530499_addedGenderBack.Designer.cs">
+      <DependentUpon>201705111530499_addedGenderBack.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\GoogleGeocodeApiRequest.cs" />
@@ -234,6 +246,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\OAuthLogin.cs" />
     <Compile Include="Models\Restaurant.cs" />
+    <Compile Include="Models\SystemHardware.cs" />
     <Compile Include="Models\YelpApiRequest.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
@@ -467,6 +480,15 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201705101729009_Init.resx">
       <DependentUpon>201705101729009_Init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705111503061_updatedModel.resx">
+      <DependentUpon>201705111503061_updatedModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705111524145_removedGender.resx">
+      <DependentUpon>201705111524145_removedGender.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705111530499_addedGenderBack.resx">
+      <DependentUpon>201705111530499_addedGenderBack.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

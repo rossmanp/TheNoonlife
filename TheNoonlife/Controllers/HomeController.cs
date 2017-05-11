@@ -6,7 +6,6 @@ using System.Linq;
 using System.Net.NetworkInformation;
 using Microsoft.AspNet.Identity;
 
-
 namespace TheNoonlife.Controllers
 {
     [RequireHttps]
@@ -30,7 +29,6 @@ namespace TheNoonlife.Controllers
             var user = _db.Users.Find(User.Identity.GetUserId());     
             return View(user);
         }
-
 
         public ActionResult FindBrunchWithSearch(LocationModel location)
         {
@@ -85,7 +83,6 @@ namespace TheNoonlife.Controllers
             }
 
             return View("FindBrunch", places);
-
         }
 
         public ActionResult Result(string Id)
@@ -116,6 +113,7 @@ namespace TheNoonlife.Controllers
             }
             return View("Index");
         }
+
         public ActionResult About()
         {
             var yelpAccess = new YelpApiRequest(new LocationModel());
@@ -130,19 +128,12 @@ namespace TheNoonlife.Controllers
             return View();
         }
 
-        public static string GetMACAddress()
-        {
-            NetworkInterface[] nics = NetworkInterface.GetAllNetworkInterfaces();
-            String sMacAddress = string.Empty;
-            foreach (NetworkInterface adapter in nics)
-            {
-                if (sMacAddress == String.Empty)// only return MAC Address from first card  
-                {
-                    IPInterfaceProperties properties = adapter.GetIPProperties();
-                    sMacAddress = adapter.GetPhysicalAddress().ToString();
-                }
-            }
-            return sMacAddress;
-        }
+        //public ActionResult ShowUserAverages()
+        //{
+        //    var usersIn20s = _db.Users
+        //        .Where(m => m.Age > 19 && m.Age < 30);
+        //    var usersIn30s = _db.Users
+        //        .Where(m => m.Age > 29 && m.Age < 40);
+        //}
     }
 }

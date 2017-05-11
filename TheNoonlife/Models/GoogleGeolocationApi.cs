@@ -8,7 +8,7 @@ namespace TheNoonlife.Models
     {
         public LocationModel GetGeolocation()
         {
-            var client = new RestClient($"https://www.googleapis.com/geolocation/v1/geolocate?macAddress={HomeController.GetMACAddress()}&key=AIzaSyCDZy_ZOyuQCTsLdmMCbTzbb3uaSxtpfKI");
+            var client = new RestClient($"https://www.googleapis.com/geolocation/v1/geolocate?macAddress={SystemHardware.GetMACAddress()}&key=AIzaSyCDZy_ZOyuQCTsLdmMCbTzbb3uaSxtpfKI");
             var request = new RestRequest(Method.POST);
             request.AddHeader("postman-token", "4364a843-d2ba-4c0a-6268-bf8003695bfa");
             request.AddHeader("cache-control", "no-cache");
