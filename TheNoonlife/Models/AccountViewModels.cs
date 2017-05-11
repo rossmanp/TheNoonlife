@@ -78,9 +78,21 @@ namespace TheNoonlife.Models
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
+        [Display(Name = "Confirm Password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [Range (1,120, ErrorMessage = "Please enter a number between 1 and 120 for age.")]
+        [Display(Name = "Age")]
+        public int Age { get; set; }
+
+        [Required]
+        [StringLength(20, ErrorMessage = "The {0} must be at least 1 character long.")]
+        [Display(Name = "Gender")]
+        public string Gender { get; set; }
+
+
     }
 
     public class ResetPasswordViewModel

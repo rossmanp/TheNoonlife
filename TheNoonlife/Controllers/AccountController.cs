@@ -152,7 +152,14 @@ namespace TheNoonlife.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    Age = model.Age,
+                    Gender = model.Gender,
+                    FavoriteRestaurant = ""
+                };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -163,7 +170,8 @@ namespace TheNoonlife.Controllers
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
+                    _db.Users.Add(user);
+                    _db.SaveChanges();
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
@@ -373,7 +381,8 @@ namespace TheNoonlife.Controllers
                     UserName = model.Email,
                     Email = model.Email,
                     Gender = model.Gender,
-                    Age = model.Age
+                    Age = model.Age,
+                    FavoriteRestaurant = ""
                 };
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)

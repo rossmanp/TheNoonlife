@@ -23,7 +23,7 @@ namespace TheNoonlife.Controllers
 
             return View();
         }
-
+        [Authorize]
         public ActionResult UserHomePage()
         {
             return View();
