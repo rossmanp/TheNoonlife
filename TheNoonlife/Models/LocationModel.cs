@@ -15,10 +15,11 @@ namespace TheNoonlife.Models
         public LocationModel(string latitude, string longitude)
         {
             Latitude = latitude;
-            Longitude = longitude;
+            Longitude = longitude;           
         }
         public string Latitude { get; set; }
         public string Longitude { get; set; }
         public string LocationName { get; set; }
+        public int Radius { get; set; }
     }
 }

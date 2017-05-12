@@ -90,14 +90,21 @@ namespace TheNoonlife.Controllers
             //Get json data as a jtoken
             var jTokenFetcher = new JtokenFetcher();
             var yelpJtoken = jTokenFetcher.GetBusinessJTokenWithToken(Id);
-
+            string priceInfo = "No price information available.";
             //Instantiate a Restaurant to be passed to the view
             //setting the values equal to the relevant json data.
             //(This can be changed to use a deserialize method at some point)
+
+            if (yelpJtoken["price"] != null)
+            {
+                priceInfo = yelpJtoken["price"].ToString();
+            }
+
             var restaurant = new Restaurant(
                 yelpJtoken["name"].ToString(),
                 yelpJtoken["image_url"].ToString(),
-                yelpJtoken["price"].ToString());
+                priceInfo);
+                
 
             return View(restaurant);
         }

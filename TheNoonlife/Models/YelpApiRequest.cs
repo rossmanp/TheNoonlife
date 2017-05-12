@@ -9,16 +9,12 @@ namespace TheNoonlife.Models
         private const string clientSecret = "lClwLGU6P5N2xrjm3dtKY7iA8pO697Qr5p6b7TGtc6J5QGSDecdUTndloC5jskGQ";
         private readonly LocationModel _locationModel;
         private readonly Restaurant _restaurant;
+        private readonly int _radius;
       
         public YelpApiRequest(LocationModel location)
         {
             _locationModel = location;                   
-        }
-
-        public YelpApiRequest(Restaurant place)
-        {
-            _restaurant = place;
-        }
+        }     
 
         public YelpApiRequest()
         {
@@ -43,7 +39,7 @@ namespace TheNoonlife.Models
             get
             {
                 var requestUrl =
-                    $"https://api.yelp.com/v3/businesses/search?term=brunch&latitude={_locationModel.Latitude}&longitude={_locationModel.Longitude}";
+                    $"https://api.yelp.com/v3/businesses/search?term=brunch&latitude={_locationModel.Latitude}&longitude={_locationModel.Longitude}&radius={_locationModel.Radius}";
                 return requestUrl;
             }
         }

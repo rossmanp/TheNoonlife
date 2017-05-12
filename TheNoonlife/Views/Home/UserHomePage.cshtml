@@ -13,10 +13,13 @@
 @using (Html.BeginForm("FindBrunchWithSearch", "Home"))
 {
     @Html.TextBox("LocationName")
+    <p><br />Get all locations within:</p>
+    @Html.RadioButton("Radius", "3220")<span>2 Miles</span><br />
+    @Html.RadioButton("Radius", "8050")<span>5 Miles</span><br />
     <input type="submit" />
 }
     
-@Html.DisplayFor(m => m.FavoriteRestaurant)
+<h4>Your favorite brunch place is: @Html.DisplayFor(m => m.FavoriteRestaurant)</h4>
 
     <div class="w3-container">
         <h2>Slideshow Indicators</h2>

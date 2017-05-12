@@ -1,15 +1,22 @@
-﻿@using (Html.BeginForm("FindBrunchWithSearch", "Home"))
-{
-  @Html.TextBox("LocationName")
-    <input type="submit"/>
-}
-<link href="~/Content/custom.css" rel="stylesheet" />
+﻿<link href="~/Content/custom.css" rel="stylesheet" />
 <link href="~/Content/custom.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+@using (Html.BeginForm("FindBrunchWithSearch", "Home"))
+{
+  @Html.TextBox("LocationName")
+    <p><br />Get all locations within: <br /></p>
+    @Html.RadioButton("Radius", "3220")<span>2 Miles</span><br/>
+    @Html.RadioButton("Radius","8050")<span>5 Miles</span><br/>    
+    <input type="submit"/>
+}
+
 @using (Html.BeginForm("FindBrunchWithCurrentLocation", "Home"))
     {
-        <input type="submit" /><p>Get Brunches by Geolocation</p>
+        <p>Get Brunches by Geolocation</p>
+        <input type="submit" />
     }
+
 <body>
 <div class="w3-container">
     <h2>Slideshow Indicators</h2>
