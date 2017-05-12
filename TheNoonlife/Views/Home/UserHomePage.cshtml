@@ -10,7 +10,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <body>
-<<<<<<< HEAD
+
 <h2>UserHomePage</h2>
 @using (Html.BeginForm("FindBrunchWithSearch", "Home"))
 {
@@ -22,25 +22,6 @@
 }
     
 <h4>Your favorite brunch place is: @Html.DisplayFor(m => m.FavoriteRestaurant)</h4>
-||||||| merged common ancestors
-<h2>UserHomePage</h2>
-@using (Html.BeginForm("FindBrunchWithSearch", "Home"))
-{
-    @Html.TextBox("LocationName")
-    <input type="submit" />
-}
-    
-@Html.DisplayFor(m => m.FavoriteRestaurant)
-=======
-    <h2>UserHomePage</h2>
-    @using (Html.BeginForm("FindBrunchWithSearch", "Home"))
-    {
-        @Html.TextBox("LocationName")
-        <input type="submit" />
-    }
-
-    @Html.DisplayFor(m => m.FavoriteRestaurant)
->>>>>>> c7e17493fa185ce49be1902b509bb210d1d2a78a
 
     <div class="w3-container">
         <h2>Slideshow Indicators</h2>

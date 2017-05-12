@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using TheNoonlife.Models;
+using System.Collections.Generic;
 
 namespace TheNoonlife.Controllers
 {
@@ -140,7 +141,10 @@ namespace TheNoonlife.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            var genders = GetAllGenders();
+            var model = new RegisterViewModel();
+            model.Genders = GetSelectListItems(genders);
+            return View(model);
         }
 
         //
@@ -150,6 +154,8 @@ namespace TheNoonlife.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
+            var genders = GetAllGenders();
+            model.Genders = GetSelectListItems(genders);
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser
@@ -437,6 +443,28 @@ namespace TheNoonlife.Controllers
             }
 
             base.Dispose(disposing);
+        }
+
+        private IEnumerable<String> GetAllGenders()
+        {
+            return new List<string>
+            {
+                "Female",
+                "Male",
+                "Prefer Not To Say"
+            };
+        }
+           
+        private IEnumerable<SelectListItem> GetSelectListItems(IEnumerable<string> elements)
+        {
+            var selectList = new List<SelectListItem>();
+            foreach (var element in elements)
+                selectList.Add(new SelectListItem
+                {
+                    Value = element,
+                    Text = element
+                });
+            return selectList;                         
         }
 
         #region Helpers
