@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Globalization;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -163,8 +161,7 @@ namespace TheNoonlife.Controllers
                     UserName = model.Email,
                     Email = model.Email,
                     Age = model.Age,
-                    Gender = model.Gender,
-                    FavoriteRestaurant = "You have not chosen a favorite brunch yet."
+                    Gender = model.Gender
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)

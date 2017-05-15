@@ -18,6 +18,7 @@ namespace TheNoonlife.Controllers
                 var currentUser = _db.Users.Find(User.Identity.GetUserId());
                 return View("UserHomePage", currentUser);
             }
+            
             return View();
         }
 
