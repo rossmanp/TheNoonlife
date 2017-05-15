@@ -52,7 +52,7 @@ namespace TheNoonlife.Controllers
             List<Restaurant> places = new List<Restaurant>();
             for (int i = 0; i < yelpJtoken["businesses"].Count(); i++)
             {
-                if (yelpJtoken["businesses"][i]["is_closed"].ToObject<bool>())
+                if (!yelpJtoken["businesses"][i]["is_closed"].ToObject<bool>())
                 {
                     places.Add(new Restaurant(yelpJtoken["businesses"][i]["name"].ToString(),
                     yelpJtoken["businesses"][i]["id"].ToString()));
@@ -126,7 +126,7 @@ namespace TheNoonlife.Controllers
             List<Restaurant> places = new List<Restaurant>();
             for (int i = 0; i < yelpJtoken["businesses"].Count(); i++)
             {
-                if (yelpJtoken["businesses"][i]["is_closed"].ToObject<bool>())
+                if (!yelpJtoken["businesses"][i]["is_closed"].ToObject<bool>())
                 {
                     places.Add(new Restaurant(yelpJtoken["businesses"][i]["name"].ToString(),
                         yelpJtoken["businesses"][i]["id"].ToString()));
@@ -157,11 +157,7 @@ namespace TheNoonlife.Controllers
 
                 yelpJtoken["price"].ToString(),
                 yelpJtoken["id"].ToString());
-
-                
-                
-
-
+                             
             return View(restaurant);
         }
 
