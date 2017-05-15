@@ -176,16 +176,7 @@ namespace TheNoonlife.Controllers
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-<<<<<<< HEAD
-                    
-=======
 
-                    
-
-                    //_db.Users.Add(user);
-                    //_db.SaveChanges();
-
->>>>>>> 1b305000c73202a7adc9cc6592b2d5dc1b262f28
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);

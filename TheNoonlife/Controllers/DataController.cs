@@ -21,7 +21,7 @@ namespace TheNoonlife.Controllers
         public ActionResult AggregateData(int userGroupQueried)
         {
             var userGroup = new UserGroupQuery(userGroupQueried);
-            if (userGroup.UsersByAgeGroup == null)
+            if (userGroup.UsersByAgeGroup.Count == 0)
             {
                 ViewBag.error = "There are no users in that age group; Please try again!";
                 return View("QueryError");

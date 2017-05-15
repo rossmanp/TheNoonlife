@@ -8,9 +8,22 @@ namespace TheNoonlife.Models
 {
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
-    {    
-       
-        public string FavoriteRestaurant { get; set; }
+    {
+        private string _favoriteRestaurant;
+
+        public string FavoriteRestaurant
+        {
+            get => _favoriteRestaurant;
+
+            set
+            {
+                if (_favoriteRestaurant == null || _favoriteRestaurant == "")
+                {
+                    _favoriteRestaurant = "No Favorite Selected";
+                }
+                _favoriteRestaurant = value;
+            }
+        }
         [StringLength(20)]
         public string Gender { get; set; }
         [Required]
