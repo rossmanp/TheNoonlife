@@ -23,6 +23,10 @@ namespace TheNoonlife.Models
             _restaurant = place;
         }
 
+        private readonly int _radius;
+         
+
+
         public YelpApiRequest( CategoryModel category)
         {
       
@@ -57,7 +61,6 @@ namespace TheNoonlife.Models
             
             get
             {
-
                 if (catprovided == true)
                 {
                     var requestUrl =
@@ -68,12 +71,17 @@ namespace TheNoonlife.Models
 
                 else
                 {
-                    var requestUrl =
+                    var  requestUrl =
                         $"https://api.yelp.com/v3/businesses/search?term=brunch&latitude={_locationModel.Latitude}&longitude={_locationModel.Longitude}";
                     return requestUrl;
                 }
 
                    
+
+                //var requestUrl =
+                //    $"https://api.yelp.com/v3/businesses/search?term=brunch&latitude={_locationModel.Latitude}&longitude={_locationModel.Longitude}&radius={_locationModel.Radius}";
+                //return requestUrl;
+
             }
         }
 
