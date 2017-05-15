@@ -226,6 +226,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\categoryModel.cs" />
     <Compile Include="Models\GoogleGeocodeApiRequest.cs" />
     <Compile Include="Models\GoogleGeolocationApi.cs" />
     <Compile Include="Models\IdentityModels.cs" />
