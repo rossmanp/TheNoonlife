@@ -341,6 +341,9 @@ namespace TheNoonlife.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
         {
+            var genders = GetAllGenders();
+            var model = new ExternalLoginConfirmationViewModel();
+            model.Genders = GetSelectListItems(genders);
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
             if (loginInfo == null)
             {
@@ -362,7 +365,7 @@ namespace TheNoonlife.Controllers
                     // If the user does not have an account, then prompt the user to create an account
                     ViewBag.ReturnUrl = returnUrl;
                     ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
-                    return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
+                    return View("ExternalLoginConfirmation", model);                    
             }
         }
 
@@ -373,6 +376,7 @@ namespace TheNoonlife.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnUrl)
         {
+            
             if (User.Identity.IsAuthenticated)
             {
                 return RedirectToAction("Index", "Manage");

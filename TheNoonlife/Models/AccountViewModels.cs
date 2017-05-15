@@ -8,8 +8,12 @@ namespace TheNoonlife.Models
         [Required]
         [Display(Name = "Email")]
         public string Email { get; set; }
+        [Required]
         public string Gender { get; set; }
+        [Required]
+        [Range (13, 120, ErrorMessage = "Please enter a number between 1 and 120 for age.")]
         public int Age { get; set; }
+        public IEnumerable<System.Web.Mvc.SelectListItem> Genders { get; set; }
     }
 
     public class ExternalLoginListViewModel
