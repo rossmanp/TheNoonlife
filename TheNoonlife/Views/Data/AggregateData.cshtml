@@ -1,0 +1,13 @@
+﻿@model TheNoonlife.Models.UserGroupQuery
+
+@{
+    ViewBag.Title = "GetUserDataByGroup";
+}
+
+<h2>GetUserDataByGroup</h2>
+<li>
+    @foreach (var item in Model.UsersByAgeGroup)
+    {
+        <ul>@item.UserName: @item.FavoriteRestaurant</ul>
+    }
+</li>

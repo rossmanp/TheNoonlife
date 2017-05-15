@@ -5,8 +5,6 @@ namespace TheNoonlife.Models
 {
     public static class SystemHardware
     {
-
-
         public static string GetMACAddress()
         {
             NetworkInterface[] nics = NetworkInterface.GetAllNetworkInterfaces();

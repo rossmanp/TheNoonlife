@@ -14,7 +14,7 @@ namespace TheNoonlife.Models
         [StringLength(20)]
         public string Gender { get; set; }
         [Required]
-        [Range(1, 120)]
+        [Range(13, 120)]
         public int Age { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

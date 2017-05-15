@@ -9,9 +9,9 @@
     <img src="@Model.Picture" width="200" height="200" /><br />
     @Model.Name<br />
     @Model.Price<br />
-    
+
     @using (Html.BeginForm("AddFavoriteRestaurant", "Home"))
     {
-        <input type="submit" value="@Model.Name" name="selection" />
+        <button type="submit" value="@Model.Name" name="selection">Favorite This Place</button>
     }
 </p>

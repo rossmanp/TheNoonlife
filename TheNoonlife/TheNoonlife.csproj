@@ -215,6 +215,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -247,6 +248,7 @@
     <Compile Include="Models\OAuthLogin.cs" />
     <Compile Include="Models\Restaurant.cs" />
     <Compile Include="Models\SystemHardware.cs" />
+    <Compile Include="Models\UserGroupQuery.cs" />
     <Compile Include="Models\YelpApiRequest.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
@@ -463,6 +465,9 @@
     <Content Include="Views\Home\GetSelectedRestaurant.cshtml" />
     <Content Include="Views\Home\FindBrunch.cshtml" />
     <Content Include="Views\Home\GetGeolocation.cshtml" />
+    <Content Include="Views\Data\Index.cshtml" />
+    <Content Include="Views\Data\AggregateData.cshtml" />
+    <Content Include="Views\Data\QueryError.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

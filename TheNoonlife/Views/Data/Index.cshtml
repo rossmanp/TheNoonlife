@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "Data Index";
+}
+
+<h2>Index</h2>
+
+@using(Html.BeginForm("AggregateData", "Data"))
+{
+    <select name="userGroupQueried">
+        <option value="19">20s</option>
+        <option value="29">30s</option>
+        <option value="39">40s</option>
+    </select>
+    <button type="submit">Find Users</button>
+}

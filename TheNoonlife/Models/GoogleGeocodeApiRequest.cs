@@ -9,26 +9,14 @@
             LocationModel = location;
         }
 
-        private const string ApiKey = "AIzaSyCDZy_ZOyuQCTsLdmMCbTzbb3uaSxtpfKI";
-
-        public string BaseUrl
-        {
-            get
-            {
-                var result =
-                    "https://maps.googleapis.com/maps/api/geocode/json?address=";
-
-                return result;
-            }
-        }
+        private const string ApiKey = "AIzaSyCDZy_ZOyuQCTsLdmMCbTzbb3uaSxtpfKI";        
 
         public string RequestUrl
         {
             get
             {
                 var result =
-                    BaseUrl +
-                    $"{LocationModel.LocationName}&key={ApiKey}";
+                    $"https://maps.googleapis.com/maps/api/geocode/json?address={LocationModel.LocationName}&key={ApiKey}";
 
                 return result;
             }

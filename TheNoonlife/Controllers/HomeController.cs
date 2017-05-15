@@ -1,9 +1,7 @@
-﻿using System;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using TheNoonlife.Models;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.NetworkInformation;
 using Microsoft.AspNet.Identity;
 
 namespace TheNoonlife.Controllers
@@ -23,6 +21,7 @@ namespace TheNoonlife.Controllers
 
             return View();
         }
+
         [Authorize]
         public ActionResult UserHomePage()
         {
