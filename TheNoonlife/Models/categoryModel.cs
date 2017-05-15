@@ -5,21 +5,22 @@ using System.Web;
 
 namespace TheNoonlife.Models
 {
-    public class LocationModel
+    public class CategoryModel
     {
-        public LocationModel()
+        public CategoryModel()
         {
-            
+
         }
 
-        public LocationModel(string latitude, string longitude)
+        public CategoryModel(string latitude, string longitude, string category)
         {
             Latitude = latitude;
-            Longitude = longitude;           
+            Longitude = longitude;
+            Category = category;
         }
         public string Latitude { get; set; }
         public string Longitude { get; set; }
         public string LocationName { get; set; }
-        public int Radius { get; set; }
+        public string Category { get; set; }
     }
 }

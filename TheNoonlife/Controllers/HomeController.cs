@@ -18,7 +18,6 @@ namespace TheNoonlife.Controllers
                 var currentUser = _db.Users.Find(User.Identity.GetUserId());
                 return View("UserHomePage", currentUser);
             }
-
             return View();
         }
 
@@ -55,10 +54,56 @@ namespace TheNoonlife.Controllers
                 places.Add(new Restaurant(yelpJtoken["businesses"][i]["name"].ToString(),
                  yelpJtoken["businesses"][i]["id"].ToString()));
             }
-
             return View("FindBrunch", places);
         }
 
+        [HttpPost]
+        public ActionResult ajaxLookup(CategoryModel indexViewModel)
+        {
+            var lat = indexViewModel.Latitude;
+            var longi = indexViewModel.Longitude;
+            var cat = indexViewModel.Category;
+            var hellyea = "hellyea";
+            // now you have lat, long and cat you need to get token for yelp like you do in the other functions
+
+            var jTokenFetcher = new JtokenFetcher();
+            var yelp = new YelpApiRequest(indexViewModel);
+            var yelpJtoken = jTokenFetcher.GetJTokenWithToken(yelp);
+            List<Restaurant> places = new List<Restaurant>();
+            for (int i = 0; i < yelpJtoken["businesses"].Count(); i++)
+            {
+                if (yelpJtoken["businesses"][i]["image_url"] == null)
+                {
+                    yelpJtoken["businesses"][i]["image_url"] = "na";
+                }
+
+                if (yelpJtoken["businesses"][i]["price"] == null)
+                {
+                    yelpJtoken["businesses"][i]["price"] = "na";
+                }
+
+
+                places.Add(new Restaurant(yelpJtoken["businesses"][i]["name"].ToString(),yelpJtoken["businesses"][i]["image_url"].ToString(),yelpJtoken["businesses"][i]["price"].ToString(),
+                 yelpJtoken["businesses"][i]["id"].ToString()));
+            }
+
+            //Pass location to the YelpApiRequest constructor 
+            //we will use this to build the request url
+            //from the latitude and longitude properties of location
+
+
+            // then you need to get jtoken (not a great name for that btw) by passing in lat, longi, and cat
+            // pass the result back in the return Json below and loop through it on the front end.
+
+
+
+            return Json(new { success = true, latitude = lat, longitude = longi, thisworked = hellyea, restaurants = places, yelpInfo = yelp });
+
+        
+        }
+
+
+        
         public ActionResult FindBrunchWithCurrentLocation()
         {
             var locater = new GoogleGeolocationApi();
@@ -89,14 +134,26 @@ namespace TheNoonlife.Controllers
             //Get json data as a jtoken
             var jTokenFetcher = new JtokenFetcher();
             var yelpJtoken = jTokenFetcher.GetBusinessJTokenWithToken(Id);
-
+            string priceInfo = "No price information available.";
             //Instantiate a Restaurant to be passed to the view
             //setting the values equal to the relevant json data.
             //(This can be changed to use a deserialize method at some point)
+
+            if (yelpJtoken["price"] != null)
+            {
+                priceInfo = yelpJtoken["price"].ToString();
+            }
+
             var restaurant = new Restaurant(
                 yelpJtoken["name"].ToString(),
                 yelpJtoken["image_url"].ToString(),
-                yelpJtoken["price"].ToString());
+
+                yelpJtoken["price"].ToString(),
+                yelpJtoken["id"].ToString());
+
+                
+                
+
 
             return View(restaurant);
         }

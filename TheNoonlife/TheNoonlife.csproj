@@ -221,24 +221,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201705101729009_Init.cs" />
-    <Compile Include="Migrations\201705101729009_Init.Designer.cs">
-      <DependentUpon>201705101729009_Init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705111503061_updatedModel.cs" />
-    <Compile Include="Migrations\201705111503061_updatedModel.Designer.cs">
-      <DependentUpon>201705111503061_updatedModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705111524145_removedGender.cs" />
-    <Compile Include="Migrations\201705111524145_removedGender.Designer.cs">
-      <DependentUpon>201705111524145_removedGender.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705111530499_addedGenderBack.cs" />
-    <Compile Include="Migrations\201705111530499_addedGenderBack.Designer.cs">
-      <DependentUpon>201705111530499_addedGenderBack.cs</DependentUpon>
+    <Compile Include="Migrations\201705120236343_initial.cs" />
+    <Compile Include="Migrations\201705120236343_initial.Designer.cs">
+      <DependentUpon>201705120236343_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\categoryModel.cs" />
     <Compile Include="Models\GoogleGeocodeApiRequest.cs" />
     <Compile Include="Models\GoogleGeolocationApi.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -483,17 +472,8 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201705101729009_Init.resx">
-      <DependentUpon>201705101729009_Init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705111503061_updatedModel.resx">
-      <DependentUpon>201705111503061_updatedModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705111524145_removedGender.resx">
-      <DependentUpon>201705111524145_removedGender.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705111530499_addedGenderBack.resx">
-      <DependentUpon>201705111530499_addedGenderBack.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201705120236343_initial.resx">
+      <DependentUpon>201705120236343_initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -92,7 +92,7 @@ namespace TheNoonlife.Models
         [Display(Name = "Gender")]
         public string Gender { get; set; }
 
-
+        public IEnumerable<System.Web.Mvc.SelectListItem> Genders { get; set; }
     }
 
     public class ResetPasswordViewModel

@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using TheNoonlife.Models;
+using System.Collections.Generic;
 
 namespace TheNoonlife.Controllers
 {
@@ -140,7 +141,10 @@ namespace TheNoonlife.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            var genders = GetAllGenders();
+            var model = new RegisterViewModel();
+            model.Genders = GetSelectListItems(genders);
+            return View(model);
         }
 
         //
@@ -150,6 +154,8 @@ namespace TheNoonlife.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
+            var genders = GetAllGenders();
+            model.Genders = GetSelectListItems(genders);
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser
@@ -170,7 +176,16 @@ namespace TheNoonlife.Controllers
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+<<<<<<< HEAD
                     
+=======
+
+                    
+
+                    //_db.Users.Add(user);
+                    //_db.SaveChanges();
+
+>>>>>>> 1b305000c73202a7adc9cc6592b2d5dc1b262f28
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
@@ -436,6 +451,28 @@ namespace TheNoonlife.Controllers
             }
 
             base.Dispose(disposing);
+        }
+
+        private IEnumerable<String> GetAllGenders()
+        {
+            return new List<string>
+            {
+                "Female",
+                "Male",
+                "Prefer Not To Say"
+            };
+        }
+           
+        private IEnumerable<SelectListItem> GetSelectListItems(IEnumerable<string> elements)
+        {
+            var selectList = new List<SelectListItem>();
+            foreach (var element in elements)
+                selectList.Add(new SelectListItem
+                {
+                    Value = element,
+                    Text = element
+                });
+            return selectList;                         
         }
 
         #region Helpers

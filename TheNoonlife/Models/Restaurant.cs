@@ -13,11 +13,12 @@ namespace TheNoonlife.Models
             this.Id = Id;
         }
 
-        public Restaurant (string Name, string picture, string price)
+        public Restaurant (string Name, string picture, string price, string id)
         {
             this.Name = Name;
             this.Picture = picture;
             this.Price = price;
+            this.Id = id;
         }
        
         public string Name { get; set; }

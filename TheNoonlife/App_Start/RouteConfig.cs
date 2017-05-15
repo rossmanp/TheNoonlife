@@ -14,10 +14,18 @@ namespace TheNoonlife
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "AjaxCategoryLookup",
+                url: "getCatgorybyLocation",
+                defaults: new { controller = "HomeController", action = "ajaxLookup", id = UrlParameter.Optional }
+                );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+            
         }
     }
 }
