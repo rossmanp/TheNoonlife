@@ -6,8 +6,8 @@
 
 <h2>Data Result</h2>
 <li>
-    @foreach (var item in Model.UsersByAgeGroup)
+    @foreach (var item in Model.UsersByGroup)
     {
-        <ul>@item.UserName: @item.FavoriteRestaurant</ul>
+        <ul>@item.Gender| @item.UserName: @item.FavoriteRestaurant</ul>
     }
 </li>

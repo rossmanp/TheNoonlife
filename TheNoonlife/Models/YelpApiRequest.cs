@@ -6,8 +6,7 @@ namespace TheNoonlife.Models
     public class YelpApiRequest
     {
         private int? _radius;
-        private const string clientID = "Z_gnHdaLf8031URZ0EkRzg";
-        private const string clientSecret = "lClwLGU6P5N2xrjm3dtKY7iA8pO697Qr5p6b7TGtc6J5QGSDecdUTndloC5jskGQ";
+        
         private readonly LocationModel _locationModel;
         private readonly Restaurant _restaurant;
         private readonly CategoryModel _categoryModel;
@@ -49,7 +48,7 @@ namespace TheNoonlife.Models
             get
             {
                 var requestAccesTokenUrl = "https://api.yelp.com/oauth2/token";
-                var urlPostData = $"grant_type=client_credentials&client_id={clientID}&client_secret={clientSecret}";
+                var urlPostData = $"grant_type=client_credentials&client_id={YelpClientInfo.ClientId}&client_secret={YelpClientInfo.ClientSecret}";
                 var webClient = new WebClient();
                 var uploadString = webClient.UploadString(requestAccesTokenUrl, urlPostData);
                 var jsonData = new JavaScriptSerializer {MaxJsonLength = int.MaxValue};
@@ -85,9 +84,7 @@ namespace TheNoonlife.Models
                     return requestUrl;
                 }              
             }
-        }
-
-      
+        }      
 
         public string RequestBusiness(string id)
         {       
@@ -95,5 +92,7 @@ namespace TheNoonlife.Models
                     $"https://api.yelp.com/v3/businesses/{id}";
                 return requestUrl;            
         }
+
+        public YelpClientInfo YelpClientInfo { get; set; }
     }
 }

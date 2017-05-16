@@ -11,6 +11,6 @@
 
     @using (Html.BeginForm("AddFavoriteRestaurant", "Home"))
     {
-        <button type="submit" value="@Model.Name" name="selection">Favorite This Place</button>
+        <button type="submit" value="@Model.Id" name="selectedRestaurantId">Favorite This Place</button>
     }
 </p>
