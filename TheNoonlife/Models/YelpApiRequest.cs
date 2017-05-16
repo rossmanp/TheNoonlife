@@ -93,6 +93,6 @@ namespace TheNoonlife.Models
                 return requestUrl;            
         }
 
-        public YelpClientInfo YelpClientInfo { get; set; }
+        public YelpClientInfo YelpClientInfo => new YelpClientInfo();
     }
 }
