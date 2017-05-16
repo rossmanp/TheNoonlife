@@ -9,10 +9,10 @@ namespace TheNoonlife.Models
 
         public UserGroupQuery(int ageGroupQueried)
         {
-            UsersByAgeGroup = _db.Users
-                .Where(m => m.Age > ageGroupQueried && m.Age < ageGroupQueried + 11).ToList();
+            UsersByGroup = _db.Users
+                .Where(m => m.Age > ageGroupQueried && m.Age < ageGroupQueried + 11).OrderBy(m => m.Gender).ToList();
         }
 
-        public List< ApplicationUser> UsersByAgeGroup { get; }
+        public List< ApplicationUser> UsersByGroup { get; }
     }
 }

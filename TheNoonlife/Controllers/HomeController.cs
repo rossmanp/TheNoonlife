@@ -46,7 +46,7 @@ namespace TheNoonlife.Controllers
             var yelp = new YelpApiRequest(location);
 
             //Get the jtoken from the yelp api
-            var yelpJtoken = jTokenFetcher.GetJTokenWithToken(yelp);
+            var yelpJtoken = jTokenFetcher.GetYelpSearchJTokenWithAccessToken(yelp);
 
             //Build a list of results to pass to the view
             List<Restaurant> places = new List<Restaurant>();
@@ -59,68 +59,35 @@ namespace TheNoonlife.Controllers
                 }
             }
             return View("FindBrunch", places);
-        }
+        }        
 
-        [HttpPost]
-        public ActionResult ajaxLookup(CategoryModel indexViewModel)
+
+        //This method gets the current location of the user and displays restaurants near
+        //their location
+        public ActionResult FindBrunchWithCurrentLocation(int? radius)
         {
-            var lat = indexViewModel.Latitude;
-            var longi = indexViewModel.Longitude;
-            var cat = indexViewModel.Category;
-            var hellyea = "hellyea";
-            // now you have lat, long and cat you need to get token for yelp like you do in the other functions
-
-            var jTokenFetcher = new JtokenFetcher();
-            var yelp = new YelpApiRequest(indexViewModel);
-            var yelpJtoken = jTokenFetcher.GetJTokenWithToken(yelp);
-            List<Restaurant> places = new List<Restaurant>();
-            for (int i = 0; i < yelpJtoken["businesses"].Count(); i++)
-            {
-                if (yelpJtoken["businesses"][i]["image_url"] == null)
-                {
-                    yelpJtoken["businesses"][i]["image_url"] = "na";
-                }
-
-                if (yelpJtoken["businesses"][i]["price"] == null)
-                {
-                    yelpJtoken["businesses"][i]["price"] = "na";
-                }
-
-
-                places.Add(new Restaurant(yelpJtoken["businesses"][i]["name"].ToString(),yelpJtoken["businesses"][i]["image_url"].ToString(),yelpJtoken["businesses"][i]["price"].ToString(),
-                 yelpJtoken["businesses"][i]["id"].ToString()));
-            }
-
-            //Pass location to the YelpApiRequest constructor 
-            //we will use this to build the request url
-            //from the latitude and longitude properties of location
-
-
-            // then you need to get jtoken (not a great name for that btw) by passing in lat, longi, and cat
-            // pass the result back in the return Json below and loop through it on the front end.
-
-
-
-            return Json(new { success = true, latitude = lat, longitude = longi, thisworked = hellyea, restaurants = places, yelpInfo = yelp });
-
-        
-        }
-
-
-        
-        public ActionResult FindBrunchWithCurrentLocation()
-        {
+            YelpApiRequest yelp;
             var locater = new GoogleGeolocationApi();
             var currentLocation = locater.GetGeolocation();
 
-            //Pass location to the YelpApiRequest constructor 
-            //we will use this to build the request url
-            //from the latitude and longitude properties of location
-            var yelp = new YelpApiRequest(currentLocation);
+            if (radius != null)
+            {
+                //Pass location and radius to the YelpApiRequest constructor 
+                //we will use this to build the request url
+                //from the latitude and longitude properties of location
+                yelp = new YelpApiRequest(currentLocation, radius);
+            }
+            else
+            {
+                //Pass location to the YelpApiRequest constructor 
+                //we will use this to build the request url
+                //from the latitude and longitude properties of location
+                yelp = new YelpApiRequest(currentLocation);
+            }
 
-            //Get the jtoken from the yelp api
+            //Get the jtoken (Json data as a C# object) from the yelp search api
             var jTokenFetcher = new JtokenFetcher();
-            var yelpJtoken = jTokenFetcher.GetJTokenWithToken(yelp);
+            var yelpJtoken = jTokenFetcher.GetYelpSearchJTokenWithAccessToken(yelp);
 
             //Build a list of results to pass to the view
             List<Restaurant> places = new List<Restaurant>();
@@ -140,17 +107,17 @@ namespace TheNoonlife.Controllers
         {
             //Get json data as a jtoken
             var jTokenFetcher = new JtokenFetcher();
-            var yelpJtoken = jTokenFetcher.GetBusinessJTokenWithToken(Id);
-            string priceInfo = "No price information available.";
-            //Instantiate a Restaurant to be passed to the view
-            //setting the values equal to the relevant json data.
-            //(This can be changed to use a deserialize method at some point)
+            var yelpJtoken = jTokenFetcher.GetYelpBusinessJTokenWithToken(Id);
 
+            string priceInfo = "No price information available.";        
             if (yelpJtoken["price"] != null)
             {
                 priceInfo = yelpJtoken["price"].ToString();
             }
 
+            //Instantiate a Restaurant to be passed to the view
+            //setting the values equal to the relevant json data.
+            //(This can be changed to use a deserialize method at some point)
             var restaurant = new Restaurant(
                 yelpJtoken["name"].ToString(),
                 yelpJtoken["image_url"].ToString(),
@@ -161,18 +128,53 @@ namespace TheNoonlife.Controllers
             return View(restaurant);
         }
 
+        //This method saves a restaurant as a user's favorite
         [Authorize]
-        public ActionResult AddFavoriteRestaurant(string selection)
+        public ActionResult AddFavoriteRestaurant(string selectedRestaurantId)
         {
             if (ModelState.IsValid)
             {
+                //Find the current user based on the user id
                 var currentUser = _db.Users.Find(User.Identity.GetUserId());
-                currentUser.FavoriteRestaurant = selection;
+                //set the users favorite restaurant equal to the selected restaurant's id
+                currentUser.FavoriteRestaurant = selectedRestaurantId;
                 _db.SaveChanges();
             }
             return View("Index");
         }
 
+        [HttpPost]
+        public ActionResult ajaxLookup(CategoryModel indexViewModel)
+        {
+            var lat = indexViewModel.Latitude;
+            var longi = indexViewModel.Longitude;
+            var cat = indexViewModel.Category;
+            var hellyea = "hellyea";
+            // now you have lat, long and cat you need to get token for yelp like you do in the other functions
+
+            var jTokenFetcher = new JtokenFetcher();
+            var yelp = new YelpApiRequest(indexViewModel);
+            var yelpJtoken = jTokenFetcher.GetYelpSearchJTokenWithAccessToken(yelp);
+            List<Restaurant> places = new List<Restaurant>();
+            for (int i = 0; i < yelpJtoken["businesses"].Count(); i++)
+            {
+                if (yelpJtoken["businesses"][i]["image_url"] == null)
+                {
+                    yelpJtoken["businesses"][i]["image_url"] = "na";
+                }
+
+                if (yelpJtoken["businesses"][i]["price"] == null)
+                {
+                    yelpJtoken["businesses"][i]["price"] = "na";
+                }
+
+
+                places.Add(new Restaurant(yelpJtoken["businesses"][i]["name"].ToString(), yelpJtoken["businesses"][i]["image_url"].ToString(), yelpJtoken["businesses"][i]["price"].ToString(),
+                 yelpJtoken["businesses"][i]["id"].ToString()));
+            }
+
+            return Json(new { success = true, latitude = lat, longitude = longi, thisworked = hellyea, restaurants = places, yelpInfo = yelp });
+        }
         public ActionResult About()
         {
             var yelpAccess = new YelpApiRequest(new LocationModel());
@@ -186,13 +188,5 @@ namespace TheNoonlife.Controllers
 
             return View();
         }
-
-        //public ActionResult ShowUserAverages()
-        //{
-        //    var usersIn20s = _db.Users
-        //        .Where(m => m.Age > 19 && m.Age < 30);
-        //    var usersIn30s = _db.Users
-        //        .Where(m => m.Age > 29 && m.Age < 40);
-        //}
     }
 }

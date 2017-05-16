@@ -4,11 +4,10 @@
     ViewBag.Title = "Result";
 }
 
-<h2>Result</h2>
+<h2>@Model.Name</h2>
 <p>
-    <img src="@Model.Picture" width="200" height="200" /><br />
-    @Model.Name<br />
-    @Model.Price<br />
+    <img src="@Model.Picture" width="200" height="200" /><br />    
+    Price: @Model.Price<br />
 
     @using (Html.BeginForm("AddFavoriteRestaurant", "Home"))
     {

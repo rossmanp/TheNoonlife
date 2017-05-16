@@ -5,42 +5,45 @@ namespace TheNoonlife.Models
 {
     public class YelpApiRequest
     {
+        private int? _radius;
         private const string clientID = "Z_gnHdaLf8031URZ0EkRzg";
         private const string clientSecret = "lClwLGU6P5N2xrjm3dtKY7iA8pO697Qr5p6b7TGtc6J5QGSDecdUTndloC5jskGQ";
         private readonly LocationModel _locationModel;
         private readonly Restaurant _restaurant;
         private readonly CategoryModel _categoryModel;
-        bool catprovided = false;
+        bool categoryProvided = false;
       
+        //This constructor is used to make general search api calls, based on location
         public YelpApiRequest(LocationModel location)
         {
             _locationModel = location;
                         
         }
 
+        public YelpApiRequest(LocationModel location, int? radius)
+        {
+            _locationModel = location;
+            _radius = radius;
+        }
+
         public YelpApiRequest(Restaurant place)
         {
             _restaurant = place;
-        }
-
-        private readonly int _radius;
+        }  
          
-
-
         public YelpApiRequest( CategoryModel category)
         {
       
             _categoryModel = category;
-            catprovided = true;
+            categoryProvided = true;
 
-        }
-
-        
+        }        
 
         public YelpApiRequest()
         {
 
         }
+
         public string AccessToken
         {
             get
@@ -61,7 +64,7 @@ namespace TheNoonlife.Models
             
             get
             {
-                if (catprovided == true)
+                if (categoryProvided == true)
                 {
                     var requestUrl =
                         $"https://api.yelp.com/v3/businesses/search?category_filter=breakfast_brunch&term={_categoryModel.Category}&latitude={_categoryModel.Latitude}&longitude={_categoryModel.Longitude}";
@@ -69,19 +72,18 @@ namespace TheNoonlife.Models
 
                 }
 
+                if (_radius != null)
+                {
+                    var requestUrl =
+                    $"https://api.yelp.com/v3/businesses/search?term=brunch&latitude={_locationModel.Latitude}&longitude={_locationModel.Longitude}&radius={_radius}";
+                    return requestUrl;
+                }
                 else
                 {
                     var  requestUrl =
                         $"https://api.yelp.com/v3/businesses/search?term=brunch&latitude={_locationModel.Latitude}&longitude={_locationModel.Longitude}";
                     return requestUrl;
-                }
-
-                   
-
-                //var requestUrl =
-                //    $"https://api.yelp.com/v3/businesses/search?term=brunch&latitude={_locationModel.Latitude}&longitude={_locationModel.Longitude}&radius={_locationModel.Radius}";
-                //return requestUrl;
-
+                }              
             }
         }
 

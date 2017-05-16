@@ -6,6 +6,7 @@ namespace TheNoonlife.Models
 {
     public class JtokenFetcher
     {
+        //This method allows us to make an api request where only an api key is required
         public JToken GetJTokenWithKey(string webRequest)
         {
             var request =
@@ -22,7 +23,9 @@ namespace TheNoonlife.Models
             return json;
         }
 
-        public JToken GetJTokenWithToken(YelpApiRequest yelp)
+        //This method makes a request to Yelp's Search api using an access token
+        //We require a YelpApiRequest object to be passed as an argument
+        public JToken GetYelpSearchJTokenWithAccessToken(YelpApiRequest yelp)
         {
             var webClient = new WebClient();
             webClient.Headers.Add("Authorization", "Bearer " + yelp.AccessToken);
@@ -31,7 +34,8 @@ namespace TheNoonlife.Models
             return yelpJtoken;
         }
 
-        public JToken GetBusinessJTokenWithToken(string id)
+        //This method makes a request to Yelp's Business api using an access token
+        public JToken GetYelpBusinessJTokenWithToken(string id)
         {
             var yelp = new YelpApiRequest();
             var webClient = new WebClient();

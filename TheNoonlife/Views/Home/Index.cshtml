@@ -13,17 +13,15 @@
 
 @using (Html.BeginForm("FindBrunchWithCurrentLocation", "Home"))
     {
-        <button type="submit">Use Current Location</button>
     <p><br />Get all locations within: <br /></p>
     @Html.RadioButton("Radius", "3220")<span>2 Miles</span><br/>
     @Html.RadioButton("Radius","8050")<span>5 Miles</span><br/>    
-    <input type="submit"/>
+    <button type="submit">Search For Brunch</button>
 }
 
 <body>
 <div class="w3-container">
-    <h2></h2>
-    <p></p>
+        <p></p>
 </div>
 
     <div class="jumbotron animate-left">
