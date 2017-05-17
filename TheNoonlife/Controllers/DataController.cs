@@ -40,10 +40,11 @@ namespace TheNoonlife.Controllers
             return View(model);
         }
 
-        
-        public ActionResult RestaurantLookUp(string place)
+        [HttpPost]
+        public ActionResult RestaurantLookUp(UserGroupQuery place)
         {
-            var userGroup = new UserGroupQuery(place);
+            string selectedValue = place.FavoriteRestaurant;
+            UserGroupQuery userGroup = new UserGroupQuery(selectedValue);
             return View(userGroup);
         }
     }
