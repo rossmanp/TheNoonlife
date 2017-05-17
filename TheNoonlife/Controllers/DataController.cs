@@ -1,5 +1,7 @@
 ﻿using System.Web.Mvc;
 using TheNoonlife.Models;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace TheNoonlife.Controllers
 {
@@ -10,6 +12,7 @@ namespace TheNoonlife.Controllers
         // GET: Data
         public ActionResult Index()
         {
+            ViewBag.Users = _db.Users.Select(u => u.FavoriteRestaurant).ToList();
             return View();
         }
 
@@ -23,6 +26,24 @@ namespace TheNoonlife.Controllers
                 return View("QueryError");
             }
 
+            return View(userGroup);
+        }
+
+        public ActionResult UserData()
+        {
+            var model = new UserGroupQuery();
+            model.BrunchList = _db.Users.ToList().Select(x => new SelectListItem
+            {
+                Value = x.FavoriteRestaurant,
+                Text = x.FavoriteRestaurant
+            });
+            return View(model);
+        }
+
+        
+        public ActionResult RestaurantLookUp(string place)
+        {
+            var userGroup = new UserGroupQuery(place);
             return View(userGroup);
         }
     }

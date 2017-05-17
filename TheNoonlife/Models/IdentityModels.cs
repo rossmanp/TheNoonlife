@@ -3,6 +3,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
+using System.Web.Mvc;
 
 namespace TheNoonlife.Models
 {
@@ -10,7 +12,7 @@ namespace TheNoonlife.Models
     public class ApplicationUser : IdentityUser
     {
         private string _favoriteRestaurant;
-
+      
         public string FavoriteRestaurant
         {
             get => _favoriteRestaurant;
@@ -49,5 +51,6 @@ namespace TheNoonlife.Models
         {
             return new ApplicationDbContext();
         }
+
     }
 }

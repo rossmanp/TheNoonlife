@@ -1,0 +1,7 @@
+﻿@model TheNoonlife.Models.UserGroupQuery
+
+@using (Html.BeginForm("RestaurantLookUp", "Data"))
+{
+    @Html.DropDownListFor(x => x.FavoriteRestaurant, Model.BrunchList)
+    <input type="submit" />
+}
