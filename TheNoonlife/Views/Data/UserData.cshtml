@@ -1,5 +1,6 @@
 ﻿@model TheNoonlife.Models.UserGroupQuery
-
+<h1>List all users who favorited a restaurant</h1>
+<br />
 @using (Html.BeginForm("RestaurantLookUp", "Data"))
 {
     @Html.DropDownListFor(x => x.FavoriteRestaurant, Model.BrunchList)

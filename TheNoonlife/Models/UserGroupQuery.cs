@@ -21,6 +21,7 @@ namespace TheNoonlife.Models
         public UserGroupQuery(string place)
         {
             UsersByGroup = _db.Users.Where(m => m.FavoriteRestaurant == place).ToList();
+            FavoriteRestaurant = place;
         }
 
         public UserGroupQuery()

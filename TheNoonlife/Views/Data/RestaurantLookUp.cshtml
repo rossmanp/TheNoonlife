@@ -4,10 +4,10 @@
     ViewBag.Title = "Restaurant Lookup";
 }
 
-<h2>Data Result</h2>
+<h2>Users who favorited @Model.FavoriteRestaurant</h2>
 <li>
     @foreach (var item in Model.UsersByGroup)
     {
-    <ul>@item.Gender| @item.UserName: @item.FavoriteRestaurant</ul>
+    <ul>@item.Gender| @item.UserName: @item.Age</ul>
     }
 </li>

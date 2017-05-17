@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 namespace TheNoonlife.Controllers
 {
+    [Authorize]
     public class DataController : Controller
     {
         private ApplicationDbContext _db = new ApplicationDbContext();
