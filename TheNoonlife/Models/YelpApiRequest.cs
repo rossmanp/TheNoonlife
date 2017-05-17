@@ -66,7 +66,7 @@ namespace TheNoonlife.Models
                 if (categoryProvided == true)
                 {
                     var requestUrl =
-                        $"https://api.yelp.com/v3/businesses/search?category_filter=breakfast_brunch&term={_categoryModel.Category}&latitude={_categoryModel.Latitude}&longitude={_categoryModel.Longitude}";
+                        $"https://api.yelp.com/v3/businesses/search?categories=breakfast,brunch&term={_categoryModel.Category}&latitude={_categoryModel.Latitude}&longitude={_categoryModel.Longitude}";
                     return requestUrl;
 
                 }

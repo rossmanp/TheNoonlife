@@ -3,21 +3,22 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link href="~/Content/custom.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
+<h1 style="text-align:center">The NoonLife</h1>
+<h3 style="text-align:center">Find a brunch place near you. Just Brunch. Just great.</h3>
 @using (Html.BeginForm("FindBrunchWithSearch", "Home"))
 {
   @Html.TextBox("LocationName")
-
+    <br />
     <button type="submit">Search For Brunch</button>
 }
 
 @using (Html.BeginForm("FindBrunchWithCurrentLocation", "Home"))
     {
-    <p><br />Get all locations within: <br /></p>
-    @Html.RadioButton("Radius", "3220")<span>2 Miles</span><br/>
-    @Html.RadioButton("Radius","8050")<span>5 Miles</span><br/>    
-    <button type="submit">Search For Brunch</button>
-}
+        <p><br />Get all locations within: <br /></p>
+        @Html.RadioButton("radius", "3220")<span>2 Miles</span><br/>
+        @Html.RadioButton("radius","8050")<span>5 Miles</span><br/>    
+        <button type="submit">Search For Brunch</button>
+    }
 
 <body>
 <div class="w3-container">
