@@ -16,17 +16,67 @@ namespace TheNoonlife.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 var currentUser = _db.Users.Find(User.Identity.GetUserId());
-                return View("UserHomePage", currentUser);
+                //Get json data as a jtoken
+                var jTokenFetcher = new JtokenFetcher();
+                if (currentUser.FavoriteRestaurant != null)
+                {
+                    var yelpJtoken = jTokenFetcher.GetYelpBusinessJTokenWithToken(currentUser.FavoriteRestaurant);
+
+                    string priceInfo = "No price information available.";
+                    if (yelpJtoken["price"] != null)
+                    {
+                        priceInfo = yelpJtoken["price"].ToString();
+                    }
+
+                    //Instantiate a Restaurant to be passed to the view
+                    //setting the values equal to the relevant json data.
+                    //(This can be changed to use a deserialize method at some point)
+                    var restaurant = new Restaurant(
+                        yelpJtoken["name"].ToString(),
+                        yelpJtoken["image_url"].ToString(),
+
+                        priceInfo,
+                        yelpJtoken["id"].ToString(),
+                        yelpJtoken["phone"].ToString());
+
+                    return View("UserHomePage", restaurant);
+                }
             }
-            
+
             return View();
         }
 
         [Authorize]
         public ActionResult UserHomePage()
         {
-            var user = _db.Users.Find(User.Identity.GetUserId());     
-            return View(user);
+            var user = _db.Users.Find(User.Identity.GetUserId());
+
+            if (user.FavoriteRestaurant == null)
+            {
+                return View("Index");
+            }
+            //Get json data as a jtoken
+            var jTokenFetcher = new JtokenFetcher();
+            var yelpJtoken = jTokenFetcher.GetYelpBusinessJTokenWithToken(user.FavoriteRestaurant);
+
+            string priceInfo = "No price information available.";
+            if (yelpJtoken["price"] != null)
+            {
+                priceInfo = yelpJtoken["price"].ToString();
+            }
+
+            //Instantiate a Restaurant to be passed to the view
+            //setting the values equal to the relevant json data.
+            //(This can be changed to use a deserialize method at some point)
+            var restaurant = new Restaurant(
+                yelpJtoken["name"].ToString(),
+                yelpJtoken["image_url"].ToString(),
+
+                yelpJtoken["price"].ToString(),
+                yelpJtoken["id"].ToString(),
+                yelpJtoken["phone"].ToString());
+
+            return View(restaurant);
         }
 
         public ActionResult FindBrunchWithSearch(LocationModel location)
@@ -59,7 +109,7 @@ namespace TheNoonlife.Controllers
                 }
             }
             return View("FindBrunch", places);
-        }        
+        }
 
 
         //This method gets the current location of the user and displays restaurants near
@@ -109,7 +159,7 @@ namespace TheNoonlife.Controllers
             var jTokenFetcher = new JtokenFetcher();
             var yelpJtoken = jTokenFetcher.GetYelpBusinessJTokenWithToken(Id);
 
-            string priceInfo = "No price information available.";        
+            string priceInfo = "No price information available.";
             if (yelpJtoken["price"] != null)
             {
                 priceInfo = yelpJtoken["price"].ToString();
@@ -123,8 +173,9 @@ namespace TheNoonlife.Controllers
                 yelpJtoken["image_url"].ToString(),
 
                 yelpJtoken["price"].ToString(),
-                yelpJtoken["id"].ToString());
-                             
+                yelpJtoken["id"].ToString(),
+                yelpJtoken["phone"].ToString());
+
             return View(restaurant);
         }
 
@@ -170,7 +221,8 @@ namespace TheNoonlife.Controllers
 
 
                 places.Add(new Restaurant(yelpJtoken["businesses"][i]["name"].ToString(), yelpJtoken["businesses"][i]["image_url"].ToString(), yelpJtoken["businesses"][i]["price"].ToString(),
-                 yelpJtoken["businesses"][i]["id"].ToString()));
+                 yelpJtoken["businesses"][i]["id"].ToString(),
+                yelpJtoken["phone"].ToString()));
             }
 
             return Json(new { success = true, latitude = lat, longitude = longi, thisworked = hellyea, restaurants = places, yelpInfo = yelp });

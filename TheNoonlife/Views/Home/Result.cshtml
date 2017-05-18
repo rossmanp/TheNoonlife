@@ -3,14 +3,60 @@
 @{
     ViewBag.Title = "Result";
 }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Maundy | Comming Soon Page</title>
+    <meta name="description" content="Free Bootstrap Theme by BootstrapMade.com">
+    <meta name="keywords" content="free website templates, free bootstrap themes, free template, free bootstrap, free website template">
+    <link href='https://fonts.googleapis.com/css?family=Lobster|Open+Sans:400,400italic,300italic,300|Raleway:300,400,600' rel='stylesheet' type='text/css'>
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/animate.css" rel="stylesheet" />
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <link href="~/Content/creative.min.css" rel="stylesheet" />
+    <link href="~/Content/creative.css" rel="stylesheet" />
+    <!-- =======================================================
+        Theme Name: Maundy
+        Theme URL: https://bootstrapmade.com/maundy-free-coming-soon-bootstrap-theme/
+        Author: BootstrapMade.com
+        Author URL: https://bootstrapmade.com
+    ======================================================= -->
+</head>
+<body>
+    <div class="content">
+        <div class="container wow fadeInUp delay-03s">
+            <div class="row">
+                <div class="logo text-center">
+                    <img src="~/Content/images/Logomakr_8nQjbJ.png" width="150" />
+                    <h2>@Model.Name</h2>
+                    <img src="@Model.Picture" class="img-circle" width="250" height="250" /><br />
+                    <p> @Model.Price<br /></p>
+                    <a href="tel: @Model.PhoneNumber" class="btn btn-primary btn-xl page-scroll" >Call</a>
+                    <div class="subcription-info text-center">
+                        <div class="subscribe_form">
 
-<h2>@Model.Name</h2>
-<p>
-    <img src="@Model.Picture" width="200" height="200" /><br />    
-    Price: @Model.Price<br />
+                            @using (Html.BeginForm("AddFavoriteRestaurant", "Home"))
+                            {
+                                <div class="text-center"><button value="@Model.Id" type="submit" class="contact-submit" name="selectedRestaurantId">Favorite This Place</button></div>
+                            }
+                        </div>
+                    </div>
+                 
+                    <h3></h3>
 
-    @using (Html.BeginForm("AddFavoriteRestaurant", "Home"))
-    {
-        <button type="submit" value="@Model.Id" name="selectedRestaurantId">Favorite This Place</button>
-    }
-</p>
+                </div>
+                
+
+            </div>
+        </div>
+    </div>
+    <script src="~/Scripts/jquery.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery.countdown.min.js"></script>
+    <script src="~/Scripts/wow.js"></script>
+    <script src="~/Scripts/custom.js"></script>
+</body>
+</html>

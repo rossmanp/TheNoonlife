@@ -13,12 +13,13 @@ namespace TheNoonlife.Models
             this.Id = Id;
         }
 
-        public Restaurant (string Name, string picture, string price, string id)
+        public Restaurant (string Name, string picture, string price, string id, string phonenumber)
         {
             this.Name = Name;
             this.Picture = picture;
             this.Price = price;
             this.Id = id;
+            PhoneNumber = phonenumber;
         }
        
         public string Name { get; set; }
@@ -28,5 +29,7 @@ namespace TheNoonlife.Models
         public string Picture { get; set; }
 
         public string Price { get; set; }
+
+        public string PhoneNumber { get; set; }
     }
 }
