@@ -369,9 +369,11 @@
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\images\brunch.jpg" />
+    <Content Include="Content\images\brunch1.jpg" />
     <Content Include="Content\images\chinese.jpg" />
     <Content Include="Content\images\81.jpg" />
     <Content Include="Content\images\Italian-food-recipes-not-from-italy-at-all.jpg" />
+    <Content Include="Content\images\Logomakr_8nQjbJ.png" />
     <Content Include="Content\images\Mexican-food-healthy-large.jpg" />
     <Content Include="Content\images\youve-seen-the-most-american-foods.jpg" />
     <Content Include="Content\img\banner01.jpg" />
@@ -410,6 +412,8 @@
     <Content Include="Content\fonts\fontawesome-webfont.woff" />
     <Content Include="Content\fonts\fontawesome-webfont.woff2" />
     <Content Include="Content\fonts\FontAwesome.otf" />
+    <None Include="Properties\PublishProfiles\TheNoonlife - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\TheNoonlife20170518102615 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="obj\Debug\TheNoonlife.csproj.FileListAbsolute.txt" />
     <Content Include="obj\Debug\TheNoonlife.dll" />
